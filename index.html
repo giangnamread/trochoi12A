@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mật mã Lớp 12A - Trọn bộ 3 Vòng & Chấm Slogan Tự Động</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Montserrat', sans-serif; font-size: 18px; }</style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-indigo-950 to-blue-950 text-white min-h-screen p-4">
+    <div class="w-full mx-auto">
+        <!-- Header Tổng -->
+        <header class="flex flex-col xl:flex-row justify-between items-center bg-white/15 backdrop-blur-md rounded-3xl p-6 mb-6 shadow-2xl border border-white/20">
+            <div>
+                <h1 class="text-3xl xl:text-4xl font-black text-yellow-400">🚀 MẬT MÃ LỚP 12A – CHẤM ĐIỂM SLOGAN VÒNG 3</h1>
+                <p class="text-base text-indigo-200 mt-1 font-bold">Tiết sinh hoạt lớp 12A — Học sinh thảo luận & gửi bài qua điện thoại</p>
+            </div>
+            <!-- Bảng điểm tổng -->
+            <div class="grid grid-cols-4 gap-3 text-center mt-4 xl:mt-0">
+                <div class="bg-indigo-900/95 px-4 py-2 rounded-2xl border-2 border-indigo-500/60">
+                    <div class="text-xs text-indigo-300 font-extrabold">TỔ 1</div>
+                    <div id="score-to1" class="text-2xl font-black text-yellow-400">0đ</div>
+                </div>
+                <div class="bg-indigo-900/95 px-4 py-2 rounded-2xl border-2 border-indigo-500/60">
+                    <div class="text-xs text-indigo-300 font-extrabold">TỔ 2</div>
+                    <div id="score-to2" class="text-2xl font-black text-yellow-400">0đ</div>
+                </div>
+                <div class="bg-indigo-900/95 px-4 py-2 rounded-2xl border-2 border-indigo-500/60">
+                    <div class="text-xs text-indigo-300 font-extrabold">TỔ 3</div>
+                    <div id="score-to3" class="text-2xl font-black text-yellow-400">0đ</div>
+                </div>
+                <div class="bg-indigo-900/95 px-4 py-2 rounded-2xl border-2 border-indigo-500/60">
+                    <div class="text-xs text-indigo-300 font-extrabold">TỔ 4</div>
+                    <div id="score-to4" class="text-2xl font-black text-yellow-400">0đ</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Menu điều hướng -->
+        <nav class="flex flex-wrap justify-center gap-3 mb-6">
+            <button onclick="switchTab('home')" id="btn-home" class="px-5 py-3 rounded-2xl font-black text-base bg-indigo-600 text-white shadow-xl">🏠 Trang chủ</button>
+            <button onclick="switchTab('r1')" id="btn-r1" class="px-5 py-3 rounded-2xl font-black text-base bg-white/10 text-indigo-200 hover:bg-white/20">⚡ Vòng 1</button>
+            <button onclick="switchTab('r2')" id="btn-r2" class="px-5 py-3 rounded-2xl font-black text-base bg-white/10 text-indigo-200 hover:bg-white/20">🎭 Vòng 2</button>
+            <button onclick="switchTab('r3')" id="btn-r3" class="px-5 py-3 rounded-2xl font-black text-base bg-rose-700 text-white shadow-xl">🎯 Vòng 3: Chấm Slogan</button>
+            <button onclick="switchTab('buzzer')" id="btn-buzzer" class="px-5 py-3 rounded-2xl font-black text-base bg-indigo-900 text-indigo-200 hover:bg-white/20">📱 Mã QR Điện Thoại</button>
+        </nav>
+
+        <!-- Nội dung -->
+        <main class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 min-h-[520px] shadow-2xl">
+            
+            <!-- HOME -->
+            <div id="tab-home" class="tab-content text-center py-16">
+                <div class="text-7xl mb-4">🎯</div>
+                <h2 class="text-4xl font-black mb-4 text-yellow-300">Chào mừng tiết sinh hoạt Lớp 12A!</h2>
+                <p class="text-indigo-100 max-w-2xl mx-auto mb-8 text-lg font-bold leading-relaxed">
+                    Hệ thống trò chơi tương tác 3 vòng dành riêng cho tập thể Lớp 12A. Học sinh dùng điện thoại gửi đáp án và được chấm điểm tự động.
+                </p>
+                <button onclick="switchTab('r3')" class="bg-gradient-to-r from-rose-600 to-red-500 text-white font-black px-8 py-4 rounded-2xl shadow-xl text-xl hover:scale-105 transition-all">
+                    Đến Ngay Vòng 3 (Chấm Slogan) 🎯
+                </button>
+            </div>
+
+            <!-- VÒNG 1 -->
+            <div id="tab-r1" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-6 border-b border-white/20 pb-4">
+                    <h2 class="text-3xl font-black text-yellow-300">⚡ Vòng 1: Phản Xạ 10 Giây - Lớp 12A</h2>
+                    <div class="bg-slate-900 px-5 py-2.5 rounded-2xl border-2 border-indigo-500/50 flex items-center gap-3">
+                        <span id="timer-1" class="text-3xl font-black text-amber-400">10s</span> 
+                        <button onclick="startCountdown(10, 'timer-1')" class="bg-indigo-600 font-extrabold px-4 py-2 rounded-xl text-sm">Bắt đầu</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-indigo-950/90 p-6 rounded-3xl border-2 border-indigo-500/50">
+                        <h3 class="font-black text-yellow-400 text-xl mb-4">💡 Gợi ý câu hỏi phản xạ:</h3>
+                        <ul class="list-disc list-inside text-lg space-y-3 text-indigo-100 font-bold">
+                            <li>Dùng 3 từ miêu tả chính xác tâm trạng sáng thứ Hai của tập thể 12A?</li>
+                            <li>Kể tên 3 trường Đại học các thành viên 12A đang nhắm tới?</li>
+                            <li>Tên tác phẩm văn học 12 viết về người lính?</li>
+                        </ul>
+                    </div>
+                    <div class="bg-indigo-950/90 p-6 rounded-3xl border-2 border-indigo-500/50 text-center flex flex-col justify-center">
+                        <p class="text-lg font-extrabold text-indigo-200 mb-4">Cộng / Trừ điểm trực tiếp các tổ:</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white/5 p-3 rounded-2xl"><span class="font-black block mb-2">TỔ 1</span><button onclick="addScore('to1', 10)" class="bg-emerald-600 px-3 py-1 rounded font-bold">+10đ</button> <button onclick="addScore('to1', -5)" class="bg-rose-600 px-3 py-1 rounded font-bold">-5đ</button></div>
+                            <div class="bg-white/5 p-3 rounded-2xl"><span class="font-black block mb-2">TỔ 2</span><button onclick="addScore('to2', 10)" class="bg-emerald-600 px-3 py-1 rounded font-bold">+10đ</button> <button onclick="addScore('to2', -5)" class="bg-rose-600 px-3 py-1 rounded font-bold">-5đ</button></div>
+                            <div class="bg-white/5 p-3 rounded-2xl"><span class="font-black block mb-2">TỔ 3</span><button onclick="addScore('to3', 10)" class="bg-emerald-600 px-3 py-1 rounded font-bold">+10đ</button> <button onclick="addScore('to3', -5)" class="bg-rose-600 px-3 py-1 rounded font-bold">-5đ</button></div>
+                            <div class="bg-white/5 p-3 rounded-2xl"><span class="font-black block mb-2">TỔ 4</span><button onclick="addScore('to4', 10)" class="bg-emerald-600 px-3 py-1 rounded font-bold">+10đ</button> <button onclick="addScore('to4', -5)" class="bg-rose-600 px-3 py-1 rounded font-bold">-5đ</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VÒNG 2 -->
+            <div id="tab-r2" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-6 border-b border-white/20 pb-4">
+                    <h2 class="text-3xl font-black text-yellow-300">🎭 Vòng 2: Hiểu Ý Đồng Đội - Lớp 12A</h2>
+                    <div class="bg-slate-900 px-5 py-2.5 rounded-2xl border-2 border-indigo-500/50 flex items-center gap-3">
+                        <span id="timer-2" class="text-3xl font-black text-amber-400">60s</span> 
+                        <button onclick="startCountdown(60, 'timer-2')" class="bg-indigo-600 font-extrabold px-4 py-2 rounded-xl text-sm">Bắt đầu</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-indigo-950/90 p-6 rounded-3xl border-2 border-indigo-500/50">
+                        <h3 class="font-black text-yellow-400 text-xl mb-4">📌 Từ khóa gửi về từ điện thoại:</h3>
+                        <div class="max-h-48 overflow-y-auto bg-slate-950 p-3 rounded-2xl border border-white/10 text-left" id="r2-answers-box">
+                            <p class="text-xs text-indigo-300 text-center">Chưa có từ khóa nào gửi từ điện thoại của lớp 12A...</p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-950/90 p-6 rounded-3xl border-2 border-indigo-500/50 text-center flex flex-col justify-center">
+                        <p class="text-lg font-extrabold text-indigo-200 mb-4">Cộng điểm từ đúng (+10đ/từ):</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="addScore('to1', 10)" class="bg-emerald-600 py-2.5 rounded-xl font-black text-sm">+10đ Tổ 1</button>
+                            <button onclick="addScore('to2', 10)" class="bg-emerald-600 py-2.5 rounded-xl font-black text-sm">+10đ Tổ 2</button>
+                            <button onclick="addScore('to3', 10)" class="bg-emerald-600 py-2.5 rounded-xl font-black text-sm">+10đ Tổ 3</button>
+                            <button onclick="addScore('to4', 10)" class="bg-emerald-600 py-2.5 rounded-xl font-black text-sm">+10đ Tổ 4</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VÒNG 3: CHẤM SLOGAN TỰ ĐỘNG -->
+            <div id="tab-r3" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-6 border-b border-white/20 pb-4">
+                    <div>
+                        <h2 class="text-3xl font-black text-yellow-300">🎯 Vòng 3: Phân Tích & Chấm Slogan Lớp 12A</h2>
+                        <p class="text-sm text-indigo-200">Học sinh 12A thảo luận, gõ slogan qua điện thoại. Hệ thống sẽ chấm điểm và chỉ rõ đúng - sai!</p>
+                    </div>
+                    <div class="bg-slate-900 px-5 py-2.5 rounded-2xl border-2 border-indigo-500/50 flex items-center gap-3">
+                        <span id="timer-3" class="text-3xl font-black text-amber-400">120s</span> 
+                        <button onclick="startCountdown(120, 'timer-3')" class="bg-indigo-600 font-extrabold px-4 py-2 rounded-xl text-sm">Bắt đầu</button>
+                    </div>
+                </div>
+
+                <div class="bg-indigo-900/80 p-6 rounded-3xl text-center mb-6 border-2 border-indigo-500/60">
+                    <p class="text-xs uppercase tracking-widest text-indigo-200 font-extrabold mb-2">Thử thách từ khóa bắt buộc cho Lớp 12A:</p>
+                    <span class="text-2xl font-black text-yellow-300 block bg-black/40 py-3 px-5 rounded-2xl border border-yellow-500/40">
+                        [Tương lai] - [Đoàn kết] - [Bứt phá] - [Về đích]
+                    </span>
+                </div>
+
+                <!-- Khu vực hiển thị bài nộp của các tổ & Nhận xét -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-indigo-950/90 p-6 rounded-3xl border-2 border-indigo-500/50">
+                        <h3 class="font-black text-yellow-400 text-lg mb-3">📥 Slogan học sinh 12A gửi từ điện thoại:</h3>
+                        <div id="r3-submissions" class="space-y-3 max-h-72 overflow-y-auto text-left">
+                            <p class="text-sm text-indigo-300 text-center py-6">Đang chờ các tổ 12A thảo luận và gửi bài...</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-6 rounded-3xl border-2 border-rose-500/50 text-left flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-black text-rose-400 text-lg mb-2 flex items-center gap-2">📊 Phân Tích & Đánh Giá Tự Động:</h3>
+                            <div id="ai-feedback-box" class="text-sm text-indigo-100 space-y-2 bg-white/5 p-4 rounded-2xl min-h-[140px] border border-white/10">
+                                <p class="text-indigo-400 italic">Bấm vào nút "📊 Chấm Điểm & Phân Tích" ở bài nộp của tổ bất kỳ để xem phân tích chi tiết đúng/sai...</p>
+                            </div>
+                        </div>
+                        <button onclick="clearR3Submissions()" class="mt-4 bg-white/10 hover:bg-white/20 text-indigo-200 py-2 rounded-xl text-xs font-bold border border-white/15">
+                            🔄 Xóa Bài Nộp Làm Lại
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUZZER & QR CODE -->
+            <div id="tab-buzzer" class="tab-content hidden text-center">
+                <h2 class="text-3xl font-black text-rose-400 mb-2">📱 MÃ QR KẾT NỐI ĐIỆN THOẠI LỚP 12A</h2>
+                <p class="text-base text-indigo-100 font-bold mb-6">Chiếu màn hình này để học sinh 12A quét mã gửi đáp án Vòng 2 và Slogan Vòng 3!</p>
+                
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 bg-slate-950/90 p-6 rounded-3xl border-2 border-indigo-500/50">
+                    <div class="bg-white p-4 rounded-2xl flex flex-col items-center shadow-xl">
+                        <span class="text-sm font-black text-slate-900 mb-3">QR - TỔ 1</span>
+                        <div id="qrcode-to1"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl flex flex-col items-center shadow-xl">
+                        <span class="text-sm font-black text-slate-900 mb-3">QR - TỔ 2</span>
+                        <div id="qrcode-to2"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl flex flex-col items-center shadow-xl">
+                        <span class="text-sm font-black text-slate-900 mb-3">QR - TỔ 3</span>
+                        <div id="qrcode-to3"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl flex flex-col items-center shadow-xl">
+                        <span class="text-sm font-black text-slate-900 mb-3">QR - TỔ 4</span>
+                        <div id="qrcode-to4"></div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        let scores = { to1: 0, to2: 0, to3: 0, to4: 0 };
+
+        window.onload = function() {
+            let baseUrl = window.location.href.split('#')[0];
+            ['to1', 'to2', 'to3', 'to4'].forEach(to => {
+                let container = document.getElementById(`qrcode-${to}`);
+                if(container) {
+                    container.innerHTML = "";
+                    new QRCode(container, {
+                        text: baseUrl + "#" + to,
+                        width: 130,
+                        height: 130,
+                        colorDark : "#000000",
+                        colorLight : "#ffffff",
+                        correctLevel : QRCode.CorrectLevel.H
+                    });
+                }
+            });
+
+            let hash = window.location.hash.replace('#', '');
+            if (['to1', 'to2', 'to3', 'to4'].includes(hash)) {
+                showMobileInterface(hash.replace('to', ''));
+            }
+
+            renderR2Answers();
+            renderR3Submissions();
+        };
+
+        // Giao diện điện thoại cho học sinh 12A
+        function showMobileInterface(toNum) {
+            document.body.innerHTML = `
+                <div style="background: #090d16; color: white; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; font-family: Montserrat, sans-serif; text-align: center;">
+                    <h1 style="color: #facc15; font-size: 24px; margin-bottom: 10px; font-weight: 900;">📱 ĐIỆN THOẠI LỚP 12A - TỔ ${toNum}</h1>
+                    
+                    <!-- Vòng 2 -->
+                    <div style="width: 100%; max-width: 320px; margin-bottom: 25px;">
+                        <p style="font-size: 13px; color: #38bdf8; font-weight: bold; margin-bottom: 5px;">Vòng 2: Gửi từ khóa</p>
+                        <input type="text" id="r2-input" placeholder="Gõ từ khóa..." style="width: 100%; padding: 10px; font-size: 15px; border-radius: 8px; border: 1px solid #4f46e5; background: #0f172a; color: white; text-align: center; margin-bottom: 8px;">
+                        <button onclick="sendR2Keyword(${toNum})" style="width: 100%; padding: 10px; border-radius: 8px; background: #0284c7; color: white; font-weight: bold; border: none; cursor: pointer;">Gửi Từ Khóa</button>
+                    </div>
+
+                    <!-- Vòng 3 -->
+                    <div style="width: 100%; max-width: 320px; border-top: 2px dashed #334155; padding-top: 15px;">
+                        <p style="font-size: 13px; color: #facc15; font-weight: bold; margin-bottom: 5px;">Vòng 3: Gửi Slogan Lớp 12A</p>
+                        <textarea id="r3-input" placeholder="Nhập câu slogan của tổ..." rows="3" style="width: 100%; padding: 10px; font-size: 15px; border-radius: 8px; border: 1px solid #eab308; background: #0f172a; color: white; text-align: center; margin-bottom: 8px;"></textarea>
+                        <button onclick="sendR3Slogan(${toNum})" style="width: 100%; padding: 12px; border-radius: 8px; background: #eab308; color: #090d16; font-weight: 900; border: none; cursor: pointer;">🚀 GỬI SLOGAN ĐỂ CHẤM ĐIỂM</button>
+                    </div>
+                    <p id="msg" style="margin-top: 15px; font-size: 14px; color: #4ade80; font-weight: bold;"></p>
+                </div>
+            `;
+        }
+
+        function sendR2Keyword(toNum) {
+            let val = document.getElementById('r2-input').value.trim();
+            if(!val) return;
+            let list = JSON.parse(localStorage.getItem('r2_keywords') || '[]');
+            list.push({ team: 'Tổ ' + toNum, word: val, time: new Date().toLocaleTimeString() });
+            localStorage.setItem('r2_keywords', JSON.stringify(list));
+            document.getElementById('msg').innerText = "✅ Đã gửi từ: " + val;
+            document.getElementById('r2-input').value = "";
+        }
+
+        function sendR3Slogan(toNum) {
+            let val = document.getElementById('r3-input').value.trim();
+            if(!val) return alert("Vui lòng nhập slogan!");
+            let list = JSON.parse(localStorage.getItem('r3_slogans') || '[]');
+            list.push({ team: 'Tổ ' + toNum, slogan: val, time: new Date().toLocaleTimeString() });
+            localStorage.setItem('r3_slogans', JSON.stringify(list));
+            document.getElementById('msg').innerText = "✅ Đã gửi Slogan lớp 12A thành công lên máy giáo viên!";
+            document.getElementById('r3-input').value = "";
+        }
+
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'r2_keywords') renderR2Answers();
+            if (e.key === 'r3_slogans') renderR3Submissions();
+        });
+
+        function renderR2Answers() {
+            let box = document.getElementById('r2-answers-box');
+            if(!box) return;
+            let list = JSON.parse(localStorage.getItem('r2_keywords') || '[]');
+            if(list.length === 0) {
+                box.innerHTML = '<p class="text-xs text-indigo-300 text-center">Chưa có từ khóa nào gửi từ điện thoại...</p>';
+                return;
+            }
+            let html = '';
+            list.reverse().forEach(item => {
+                html += `<div class="bg-white/5 p-2 rounded-xl mb-2 flex justify-between items-center text-sm"><span><b>${item.team}:</b> <span class="text-emerald-400">"${item.word}"</span></span><span class="text-xs text-slate-400">${item.time}</span></div>`;
+            });
+            box.innerHTML = html;
+        }
+
+        function renderR3Submissions() {
+            let box = document.getElementById('r3-submissions');
+            if(!box) return;
+            let list = JSON.parse(localStorage.getItem('r3_slogans') || '[]');
+            if(list.length === 0) {
+                box.innerHTML = '<p class="text-sm text-indigo-300 text-center py-6">Đang chờ các tổ lớp 12A thảo luận và gửi bài...</p>';
+                return;
+            }
+            let html = '';
+            list.forEach((item, idx) => {
+                html += `
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-black text-yellow-300">${item.team}</span>
+                            <span class="text-xs text-indigo-300">${item.time}</span>
+                        </div>
+                        <p class="text-base text-white font-bold bg-black/30 p-3 rounded-xl mb-3">"${item.slogan}"</p>
+                        <button onclick="evaluateSlogan('${item.team}', '${item.slogan.replace(/'/g, "\\'")}')" class="bg-gradient-to-r from-rose-600 to-red-500 hover:scale-105 transition-all px-4 py-2 rounded-xl text-xs font-extrabold text-white shadow-lg">
+                            📊 Chấm Điểm & Phân Tích
+                        </button>
+                    </div>
+                `;
+            });
+            box.innerHTML = html;
+        }
+
+        // Phân tích đúng - sai chi tiết cho Slogan lớp 12A
+        function evaluateSlogan(teamName, sloganText) {
+            let box = document.getElementById('ai-feedback-box');
+            box.innerHTML = `<p class="text-amber-300 animate-pulse">📊 Hệ thống đang phân tích cấu trúc và ý nghĩa bài làm của ${teamName} (Lớp 12A)...</p>`;
+
+            setTimeout(() => {
+                let lower = sloganText.toLowerCase();
+                let hasTL = lower.includes('tương lai');
+                let hasĐK = lower.includes('đoàn kết');
+                let hasBP = lower.includes('bứt phá');
+                let hasVĐ = lower.includes('về đích');
+                let count = (hasTL ? 1 : 0) + (hasĐK ? 1 : 0) + (hasBP ? 1 : 0) + (hasVĐ ? 1 : 0);
+
+                let score = count * 7 + (sloganText.length > 20 ? 22 : 10);
+                if(score > 50) score = 50;
+
+                let analysisHTML = `
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-black text-yellow-300 text-base">Đánh giá bài của: ${teamName} (12A)</span>
+                            <span class="bg-emerald-600 text-white px-3 py-1 rounded-lg font-black text-sm">Điểm số: ${score}/50đ</span>
+                        </div>
+                        <p class="text-xs text-indigo-200"><b>Slogan:</b> "${sloganText}"</p>
+                        <div class="text-xs space-y-1 mt-2 border-t border-white/10 pt-2">
+                            <p><b>1. Kiểm tra từ khóa bắt buộc (Đúng/Sai):</b> ${count}/4 từ khóa (${hasTL?'✓ Tương lai ':'✗ Thiếu TL '}${hasĐK?'✓ Đoàn kết ':'✗ Thiếu ĐK '}${hasBP?'✓ Bứt phá ':'✗ Thiếu BP '}${hasVĐ?'✓ Về đích':'✗ Thiếu VĐ'})</p>
+                            <p><b>2. Phân tích ý nghĩa & Cấu trúc:</b> ${count === 4 ? '<span class="text-emerald-400">Đạt yêu cầu cấu trúc chuẩn Slogan của tập thể 12A. Thông điệp mạnh mẽ, truyền cảm hứng cuối cấp.</span>' : '<span class="text-rose-400">Chưa đạt yêu cầu do thiếu từ khóa bắt buộc, làm giảm tính liên kết của thông điệp.</span>'}</p>
+                            <p><b>3. Nhận xét chi tiết:</b> ${count === 4 ? 'Câu từ súc tích, nhịp điệu tuyệt vời cho học sinh 12A!' : 'Cần bổ sung các từ khóa còn thiếu để hoàn thiện nội dung theo đúng thể lệ thử thách.'}</p>
+                        </div>
+                    </div>
+                `;
+                box.innerHTML = analysisHTML;
+            }, 800);
+        }
+
+        function clearR3Submissions() {
+            localStorage.removeItem('r3_slogans');
+            renderR3Submissions();
+            document.getElementById('ai-feedback-box').innerHTML = '<p class="text-indigo-400 italic">Bấm vào nút "📊 Chấm Điểm & Phân Tích" ở bài nộp của tổ bất kỳ để xem phân tích chi tiết đúng/sai...</p>';
+        }
+
+        function addScore(team, points) {
+            scores[team] = Math.max(0, scores[team] + points);
+            document.getElementById(`score-${team}`).innerText = scores[team] + 'đ';
+        }
+
+        function switchTab(tabId) {
+            ['home', 'r1', 'r2', 'r3', 'buzzer'].forEach(id => {
+                let el = document.getElementById('tab-' + id);
+                if(el) el.classList.add('hidden');
+                let btn = document.getElementById('btn-' + id);
+                if(btn) btn.className = "px-5 py-3 rounded-2xl font-black text-base bg-white/10 text-indigo-200 hover:bg-white/20";
+            });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            let activeBtn = document.getElementById('btn-' + tabId);
+            if(tabId === 'r3') {
+                activeBtn.className = "px-5 py-3 rounded-2xl font-black text-base bg-rose-700 text-white shadow-xl";
+            } else {
+                activeBtn.className = "px-5 py-3 rounded-2xl font-black text-base bg-indigo-600 text-white shadow-xl";
+            }
+        }
+
+        function startCountdown(seconds, elementId) {
+            let counter = seconds;
+            let el = document.getElementById(elementId);
+            let interval = setInterval(() => {
+                counter--;
+                el.innerText = counter + "s";
+                if (counter <= 0) {
+                    clearInterval(interval);
+                    el.innerText = "Hết giờ!";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
