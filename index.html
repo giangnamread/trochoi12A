@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mật mã Lớp 12A - Trọn bộ 3 Vòng</title>
+    <title>Mật mã Lớp 12A - Chuông Bấm Siêu Nhạy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
         <header class="flex flex-col xl:flex-row justify-between items-center bg-white/15 backdrop-blur-md rounded-3xl p-6 mb-6 shadow-2xl border border-white/20">
             <div>
                 <h1 class="text-3xl xl:text-4xl font-black text-yellow-400">🚀 MẬT MÃ LỚP 12A – HỆ THỐNG TRÒ CHƠI 3 VÒNG</h1>
-                <p class="text-base text-indigo-200 mt-1 font-bold">Tiết sinh hoạt lớp 12A — Tích hợp chuông bấm & chấm điểm tự động</p>
+                <p class="text-base text-indigo-200 mt-1 font-bold">Tiết sinh hoạt lớp 12A — Tích hợp chuông bấm siêu nhạy & chấm điểm tự động</p>
             </div>
             <!-- Bảng điểm tổng -->
             <div class="grid grid-cols-4 gap-3 text-center mt-4 xl:mt-0">
@@ -62,7 +62,7 @@
                 </button>
             </div>
 
-            <!-- VÒNG 1 (Mặc định hiển thị đầu tiên) -->
+            <!-- VÒNG 1 -->
             <div id="tab-r1" class="tab-content">
                 <div class="flex justify-between items-center mb-6 border-b border-white/20 pb-4">
                     <h2 class="text-3xl font-black text-yellow-300">⚡ Vòng 1: Phản Xạ & Bấm Chuông - Lớp 12A</h2>
@@ -205,7 +205,7 @@
 
     <script>
         let scores = { to1: 0, to2: 0, to3: 0, to4: 0 };
-        let buzzerLocked = false;
+        let lastBuzzerTime = 0;
 
         window.onload = function() {
             let baseUrl = window.location.href.split('#')[0];
@@ -228,8 +228,11 @@
             if (['to1', 'to2', 'to3', 'to4'].includes(hash)) {
                 showMobileInterface(hash.replace('to', ''));
             } else {
-                switchTab('r1'); // Mặc định mở Vòng 1 khi khởi động
+                switchTab('r1');
             }
+
+            // Đồng bộ dữ liệu liên tục mỗi 0.3 giây
+            setInterval(checkServerData, 300);
 
             renderR2Answers();
             renderR3Submissions();
@@ -264,8 +267,9 @@
         }
 
         function sendBell(toNum) {
+            let now = Date.now();
             localStorage.setItem('buzzer_winner', 'Tổ ' + toNum);
-            localStorage.setItem('buzzer_time', Date.now());
+            localStorage.setItem('buzzer_time', now);
             document.getElementById('msg').innerText = "🔔 Đã bấm chuông thành công!";
         }
 
@@ -289,17 +293,24 @@
             document.getElementById('r3-input').value = "";
         }
 
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'buzzer_winner') {
-                let disp = document.getElementById('buzzer-display');
-                if(disp) disp.innerHTML = `<span class="text-4xl font-black text-yellow-300">🎉 ${e.newValue} GIẬT CHUÔNG TRƯỚC! 🎉</span>`;
+        function checkServerData() {
+            let winner = localStorage.getItem('buzzer_winner');
+            let bTime = localStorage.getItem('buzzer_time') || 0;
+            let disp = document.getElementById('buzzer-display');
+            
+            if(disp && winner && bTime > lastBuzzerTime) {
+                lastBuzzerTime = bTime;
+                disp.innerHTML = `<span class="text-3xl font-black text-yellow-300">🎉 ${winner} GIẬT CHUÔNG TRƯỚC! 🎉</span>`;
             }
-            if (e.key === 'r2_keywords') renderR2Answers();
-            if (e.key === 'r3_slogans') renderR3Submissions();
-        });
+
+            renderR2Answers();
+            renderR3Submissions();
+        }
 
         function resetBuzzer() {
             localStorage.removeItem('buzzer_winner');
+            localStorage.setItem('buzzer_time', 0);
+            lastBuzzerTime = 0;
             let disp = document.getElementById('buzzer-display');
             if(disp) disp.innerHTML = `⏳ Đang chờ tín hiệu chuông...`;
         }
