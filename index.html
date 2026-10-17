@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mật mã Lớp 12A - Thêm Thời Gian Riêng Cho Từng Tổ</title>
+    <title>Mật mã Lớp 12A - Phát Âm Tiếng Việt Chuẩn 100%</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <!-- Firebase SDK -->
@@ -109,13 +109,12 @@
                 <div class="flex flex-col xl:flex-row justify-between items-center mb-6 border-b border-white/20 pb-4 gap-4">
                     <div>
                         <h2 class="text-3xl font-black text-yellow-300">🎭 Vòng 2: Hiểu Ý Đồng Đội (Thi Lần Lượt Từng Tổ)</h2>
-                        <p class="text-sm text-indigo-200">Chọn tổ lên thi để hệ thống zoom to từ khóa và bấm bắt đầu đếm ngược 60 giây riêng cho tổ đó.</p>
+                        <p class="text-sm text-indigo-200">Chọn tổ, bấm "Ẩn từ khóa" khi học sinh diễn tả, và bấm "Bắt đầu" để phóng to đồng hồ 60s.</p>
                     </div>
                     <div class="flex items-center gap-4">
-                        <div class="bg-slate-900 px-5 py-2 rounded-2xl border-2 border-indigo-500/50 flex items-center gap-2">
-                            <span id="timer-2" class="text-2xl font-black text-amber-400">60s</span> 
-                            <button onclick="startCountdown(60, 'timer-2')" class="bg-indigo-600 font-extrabold px-3 py-1.5 rounded-xl text-xs cursor-pointer">Bắt đầu</button>
-                        </div>
+                        <button onclick="startCountdown(60, 'timer-2')" class="bg-gradient-to-r from-amber-500 to-yellow-600 hover:scale-105 text-slate-950 font-black px-6 py-2.5 rounded-2xl text-base shadow-lg cursor-pointer border-2 border-yellow-300">
+                            ⏱️ Bắt Đầu Đếm Ngược (60s)
+                        </button>
                         <div class="flex gap-2">
                             <button onclick="selectTeam(1)" id="team-btn-1" class="px-4 py-2 rounded-xl font-black text-sm bg-indigo-700 text-white cursor-pointer border border-indigo-400">Tổ 1</button>
                             <button onclick="selectTeam(2)" id="team-btn-2" class="px-4 py-2 rounded-xl font-black text-sm bg-white/10 text-indigo-200 cursor-pointer border border-white/20">Tổ 2</button>
@@ -125,9 +124,19 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-r from-rose-950 via-slate-900 to-indigo-950 p-8 rounded-3xl mb-6 text-center border-4 border-rose-500/80 shadow-2xl">
-                    <span id="current-team-title" class="text-sm uppercase tracking-widest text-rose-300 font-black block mb-3">ĐANG HIỂN THỊ TỪ KHÓA: TỔ 1 (Thời gian: 60 giây)</span>
-                    <div id="zoomed-keywords" class="text-4xl xl:text-5xl font-black text-yellow-400 tracking-wide py-4 bg-black/50 rounded-2xl border-2 border-yellow-500/50 shadow-inner">
+                <!-- KHUNG ĐỒNG HỒ PHÓNG TO CHO TIVI LỚN -->
+                <div class="bg-slate-950 p-6 rounded-3xl mb-6 text-center border-4 border-amber-500 shadow-2xl">
+                    <span class="text-xs uppercase tracking-widest text-indigo-300 font-extrabold block mb-1">THỜI GIAN THI CỦA TỔ ĐANG DIỄN TẢ:</span>
+                    <div id="timer-2" class="text-6xl xl:text-7xl font-black text-amber-400 tracking-wider py-2">60s</div>
+                </div>
+
+                <div class="bg-gradient-to-r from-rose-950 via-slate-900 to-indigo-950 p-8 rounded-3xl mb-6 text-center border-4 border-rose-500/80 shadow-2xl relative">
+                    <div class="flex justify-between items-center mb-3">
+                        <span id="current-team-title" class="text-sm uppercase tracking-widest text-rose-300 font-black">ĐANG HIỂN THỊ TỪ KHÓA: TỔ 1</span>
+                        <button onclick="toggleKeywordsVisibility()" id="toggle-btn" class="bg-amber-600 hover:bg-amber-500 px-4 py-1.5 rounded-xl text-xs font-black cursor-pointer shadow-md">👁️ Ẩn Từ Khóa</button>
+                    </div>
+                    
+                    <div id="zoomed-keywords" class="text-4xl xl:text-5xl font-black text-yellow-400 tracking-wide py-4 bg-black/50 rounded-2xl border-2 border-yellow-500/50 shadow-inner transition-all">
                         Áo dài — Phượng vội — Lưu bút — Sân trường
                     </div>
                     <p class="text-xs text-indigo-300 mt-3 font-bold">(Chỉ 2 học sinh trên bục giảng nhìn thấy từ khóa để diễn tả)</p>
@@ -137,7 +146,7 @@
                     <div class="bg-indigo-950/90 p-6 rounded-3xl border-2 border-indigo-500/50 flex flex-col justify-between">
                         <div>
                             <div class="flex justify-between items-center mb-3">
-                                <h3 class="font-black text-yellow-400 text-xl">📌 Từ khóa học sinh gõ gửi về (Kèm thời gian):</h3>
+                                <h3 class="font-black text-yellow-400 text-xl">📌 Từ khóa học sinh gõ gửi về:</h3>
                                 <button onclick="clearKeywordsCloud()" class="bg-rose-600 hover:bg-rose-500 px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer">🗑️ Xóa</button>
                             </div>
                             <div class="max-h-48 overflow-y-auto bg-slate-950 p-3 rounded-2xl border border-white/10 text-left" id="r2-answers-box">
@@ -162,7 +171,7 @@
                 <div class="flex justify-between items-center mb-6 border-b border-white/20 pb-4">
                     <div>
                         <h2 class="text-3xl font-black text-yellow-300">🎯 Vòng 3: Giải Mã Thông Điệp Slogan Lớp 12A</h2>
-                        <p class="text-sm text-indigo-200"><b>Yêu cầu & Thể lệ:</b> Các tổ thảo luận trong 2 phút, sáng tác Slogan và gửi qua điện thoại (kèm thời gian nộp).</p>
+                        <p class="text-sm text-indigo-200"><b>Yêu cầu & Thể lệ:</b> Các tổ thảo luận trong 2 phút, sáng tác Slogan và gửi qua điện thoại.</p>
                     </div>
                     <div class="bg-slate-900 px-5 py-2.5 rounded-2xl border-2 border-indigo-500/50 flex items-center gap-3">
                         <span id="timer-3" class="text-3xl font-black text-amber-400">120s</span> 
@@ -249,6 +258,7 @@
 
         let scores = { to1: 0, to2: 0, to3: 0, to4: 0 };
         let currentActiveTeam = 1;
+        let isKeywordsHidden = false;
 
         const teamKeywords = {
             1: "Áo dài — Phượng vội — Lưu bút — Sân trường",
@@ -259,14 +269,38 @@
 
         function selectTeam(num) {
             currentActiveTeam = num;
+            isKeywordsHidden = false;
+            document.getElementById('toggle-btn').innerText = "👁️ Ẩn Từ Khóa";
             for(let i=1; i<=4; i++) {
                 let btn = document.getElementById(`team-btn-${i}`);
                 if(btn) {
                     btn.className = i === num ? "px-4 py-2 rounded-xl font-black text-sm bg-indigo-700 text-white cursor-pointer border border-indigo-400" : "px-4 py-2 rounded-xl font-black text-sm bg-white/10 text-indigo-200 cursor-pointer border border-white/20";
                 }
             }
-            document.getElementById('current-team-title').innerText = `ĐANG HIỂN THỊ TỪ KHÓA: TỔ ${num} (Thời gian: 60 giây)`;
-            document.getElementById('zoomed-keywords').innerText = teamKeywords[num];
+            document.getElementById('current-team-title').innerText = `ĐANG HIỂN THỊ TỪ KHÓA: TỔ ${num}`;
+            let kwBox = document.getElementById('zoomed-keywords');
+            kwBox.innerText = teamKeywords[num];
+            kwBox.style.filter = "none";
+            kwBox.style.color = "#facc15";
+        }
+
+        function toggleKeywordsVisibility() {
+            isKeywordsHidden = !isKeywordsHidden;
+            let kwBox = document.getElementById('zoomed-keywords');
+            let btn = document.getElementById('toggle-btn');
+            if(isKeywordsHidden) {
+                kwBox.innerText = "🔒 [ TỪ KHÓA ĐÃ ĐƯỢC ẨN ĐỂ DIỄN TẢ ] 🔒";
+                kwBox.style.filter = "blur(8px)";
+                kwBox.style.color = "#94a3b8";
+                btn.innerText = "👁️‍🗨️ Hiện Từ Khóa";
+                btn.className = "bg-emerald-600 hover:bg-emerald-500 px-4 py-1.5 rounded-xl text-xs font-black cursor-pointer shadow-md";
+            } else {
+                kwBox.innerText = teamKeywords[currentActiveTeam];
+                kwBox.style.filter = "none";
+                kwBox.style.color = "#facc15";
+                btn.innerText = "👁️ Ẩn Từ Khóa";
+                btn.className = "bg-amber-600 hover:bg-amber-500 px-4 py-1.5 rounded-xl text-xs font-black cursor-pointer shadow-md";
+            }
         }
 
         window.onload = function() {
@@ -332,7 +366,7 @@
 
         function cloudSendBell(toNum) {
             let now = new Date();
-            let timeStr = now.toLocaleTimeString() + " (" + now.getMilliseconds() + "ms)";
+            let timeStr = now.toLocaleTimeString();
             let data = { winner: 'Tổ ' + toNum, time: timeStr, rawTime: Date.now() };
             let ref = getCloudRef("buzzer");
             if(ref) ref.doc("current").set(data);
@@ -351,7 +385,7 @@
             let list = JSON.parse(localStorage.getItem('cloud_keywords') || '[]');
             list.push(item);
             localStorage.setItem('cloud_keywords', JSON.stringify(list));
-            document.getElementById('msg').innerText = "✅ Đã gửi lúc " + timeStr + ": " + val;
+            document.getElementById('msg').innerText = "✅ Đã gửi từ đoán lúc " + timeStr + ": " + val;
             document.getElementById('r2-input').value = "";
         }
 
@@ -531,15 +565,39 @@
             if(activeBtn) activeBtn.className = "px-5 py-3 rounded-2xl font-black text-base bg-indigo-600 text-white shadow-xl cursor-pointer";
         }
 
+        // Phát âm giọng nói Tiếng Việt 100% chuẩn xác
+        function speakVietnamese(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Hủy các lệnh đọc trước đó để phát ngay lập tức
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'vi-VN';
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+
+                // Cố gắng chọn giọng đọc tiếng Việt nếu trình duyệt có hỗ trợ sẵn
+                let voices = window.speechSynthesis.getVoices();
+                let viVoice = voices.find(v => v.lang === 'vi-VN' || v.lang.toLowerCase().includes('vi'));
+                if (viVoice) {
+                    utterance.voice = viVoice;
+                }
+
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
         function startCountdown(seconds, elementId) {
             let counter = seconds;
             let el = document.getElementById(elementId);
             let interval = setInterval(() => {
                 counter--;
                 el.innerText = counter + "s";
-                if (counter <= 0) {
+                if (counter > 0) {
+                    el.style.color = "#fbbf24";
+                } else {
                     clearInterval(interval);
                     el.innerText = "Hết giờ!";
+                    el.style.color = "#f43f5e";
+                    speakVietnamese("Đã hết giờ các bạn ơi hãy trả lời qua điện thoại nhanh");
                 }
             }, 1000);
         }
